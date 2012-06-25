@@ -19,8 +19,11 @@ class Listener
   # Returns a boolean of whether the matcher matched.
   call: (message) ->
     if match = @matcher message
-      @callback new @robot.Response(@robot, message, match)
-      true
+      result = @callback new @robot.Response(@robot, message, match)
+      if result is false
+        false
+      else
+        true
     else
       false
 
